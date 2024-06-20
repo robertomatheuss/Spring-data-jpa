@@ -30,7 +30,9 @@ classDiagram
         +Book book
     }
     
-    Book --> Author : written by
-    Book --> Publisher : published by
-    Book --> Review : has
+        
+    Author --o BookAuthor : "many to many"
+    Book --o BookAuthor : "many to many"
+    Publisher --> Book : "one to many"
+    Book --> Review : "one to one"
 ```
