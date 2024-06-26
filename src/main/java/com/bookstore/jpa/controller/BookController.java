@@ -3,7 +3,6 @@ package com.bookstore.jpa.controller;
 import com.bookstore.jpa.dto.BookRecordDTO;
 import com.bookstore.jpa.dto.PublisherRecordDTO;
 import com.bookstore.jpa.model.BookModel;
-import com.bookstore.jpa.model.PublisherModel;
 import com.bookstore.jpa.services.BookService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController

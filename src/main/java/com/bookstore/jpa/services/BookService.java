@@ -8,16 +8,12 @@ import com.bookstore.jpa.model.ReviewModel;
 import com.bookstore.jpa.repositories.AuthorRepository;
 import com.bookstore.jpa.repositories.BookRepository;
 import com.bookstore.jpa.repositories.PublisherRepository;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -45,7 +41,7 @@ public class BookService {
         BookModel book = new BookModel();
         if (bookRepository.findAll().stream().anyMatch(bookList-> bookList.getTitle().equals(bookRecordDTO.title()))){
             throw new BookException("There is already a book with this title.");
-        };
+        }
         book.setTitle(bookRecordDTO.title());
         book.setPublisher(publisherRepository.findById(bookRecordDTO.publisherId()).get());
         book.setAuthors(authorRepository.findAllById(bookRecordDTO.authorIds()).stream().collect(Collectors.toSet()));
