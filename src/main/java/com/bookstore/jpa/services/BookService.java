@@ -4,6 +4,7 @@ import com.bookstore.jpa.controller.exceptions.BookException;
 import com.bookstore.jpa.dto.BookRecordDTO;
 import com.bookstore.jpa.dto.PublisherRecordDTO;
 import com.bookstore.jpa.model.BookModel;
+import com.bookstore.jpa.model.PublisherModel;
 import com.bookstore.jpa.model.ReviewModel;
 import com.bookstore.jpa.repositories.AuthorRepository;
 import com.bookstore.jpa.repositories.BookRepository;
@@ -61,7 +62,9 @@ public class BookService {
     @Transactional
     public BookModel updatePublisherInBook(UUID BookId, PublisherRecordDTO publisherDTO){
         BookModel book = bookRepository.findById(BookId).orElseThrow(() -> new NoSuchElementException("Book not found"));
-        book.setPublisher(publisherRepository.findByName(publisherDTO.publisherName()));
+        PublisherModel newPublisher = publisherRepository.findByName(publisherDTO.publisherName())
+                .orElseThrow(() -> new NoSuchElementException("Name provided is incorrect"));
+        book.setPublisher(newPublisher);
         return bookRepository.save(book);
     }
 }
